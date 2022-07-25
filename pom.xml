@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.minhhoangvn</groupId>
     <artifactId>protoc-jar</artifactId>
     <packaging>jar</packaging>
-    <version>3.11.4-SNAPSHOT</version>
+    <version>3.11.4</version>
     <name>protoc-jar</name>
     <url>https://github.com/minhhoangvn/protoc-jar</url>
     <description>Protocol Buffers compiler - executable JAR and API</description>
@@ -26,10 +27,9 @@
 
     <scm>
         <connection>scm:git:git@github.com:minhhoangvn/protoc-jar.git</connection>
-        <developerConnection>scm:git:git@github.com:minhhoangvn/protoc-jar.git</developerConnection>
-        <url>git@github.com:minhhoangvn/protoc-jar.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <developerConnection>scm:git:ssh://github.com:minhhoangvn/protoc-jar.git</developerConnection>
+        <url>https://github.com/minhhoangvn/protoc-jar/tree/master</url>
+    </scm>
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.target>1.8</maven.compiler.target>
