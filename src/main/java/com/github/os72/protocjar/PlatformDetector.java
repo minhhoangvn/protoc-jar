@@ -1,6 +1,6 @@
 /*
  * Copyright 2014 protoc-jar developers
- * 
+ *
  * Incorporates code derived from https://github.com/trustin/os-maven-plugin
  * Copyright 2014 Trustin Heuiseung Lee.
  *
@@ -16,7 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// code from kr.motd.maven:os-maven-plugin:1.5.0.Final, repackaged to avoid interference in protoc-jar-maven-plugin
+// code from kr.motd.maven:os-maven-plugin:1.5.0.Final, repackaged to avoid interference in
+// protoc-jar-maven-plugin
 package com.github.os72.protocjar;
 
 import java.io.BufferedReader;
@@ -36,8 +37,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PlatformDetector
-{
+public class PlatformDetector {
     public static final String DETECTED_NAME = "os.detected.name";
     public static final String DETECTED_ARCH = "os.detected.arch";
     public static final String DETECTED_VERSION = "os.detected.version";
@@ -52,7 +52,9 @@ public class PlatformDetector
     private static final String LINUX_ID_PREFIX = "ID=";
     private static final String LINUX_ID_LIKE_PREFIX = "ID_LIKE=";
     private static final String LINUX_VERSION_ID_PREFIX = "VERSION_ID=";
-    private static final String[] LINUX_OS_RELEASE_FILES = {"/etc/os-release", "/usr/lib/os-release"};
+    private static final String[] LINUX_OS_RELEASE_FILES = {
+        "/etc/os-release", "/usr/lib/os-release"
+    };
     private static final String REDHAT_RELEASE_FILE = "/etc/redhat-release";
     private static final String[] DEFAULT_REDHAT_VARIANTS = {"rhel", "fedora"};
 
@@ -133,11 +135,11 @@ public class PlatformDetector
     }
 
     protected void log(String message) {
-    	//log(message);
+        // log(message);
     }
 
     protected void logProperty(String name, String value) {
-    	//log(name + ": " + value);
+        // log(name + ": " + value);
     }
 
     private static String normalizeOs(String value) {
@@ -260,7 +262,7 @@ public class PlatformDetector
             String version = null;
             Set<String> likeSet = new LinkedHashSet<String>();
             String line;
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 // Parse the ID line.
                 if (line.startsWith(LINUX_ID_PREFIX)) {
                     // Set the ID for this version.
@@ -274,7 +276,9 @@ public class PlatformDetector
                 // Parse the VERSION_ID line.
                 if (line.startsWith(LINUX_VERSION_ID_PREFIX)) {
                     // Set the ID for this version.
-                    version = normalizeOsReleaseValue(line.substring(LINUX_VERSION_ID_PREFIX.length()));
+                    version =
+                            normalizeOsReleaseValue(
+                                    line.substring(LINUX_VERSION_ID_PREFIX.length()));
                     continue;
                 }
 
@@ -283,7 +287,7 @@ public class PlatformDetector
                     line = normalizeOsReleaseValue(line.substring(LINUX_ID_LIKE_PREFIX.length()));
 
                     // Split the line on any whitespace.
-                    String[] parts =  line.split("\\s+");
+                    String[] parts = line.split("\\s+");
                     Collections.addAll(likeSet, parts);
                 }
             }
@@ -300,9 +304,9 @@ public class PlatformDetector
     }
 
     /**
-     * Parses the {@code /etc/redhat-release} and returns a {@link LinuxRelease} containing the
-     * ID and like ["rhel", "fedora", ID]. Currently only supported for CentOS, Fedora, and RHEL.
-     * Other variants will return {@code null}.
+     * Parses the {@code /etc/redhat-release} and returns a {@link LinuxRelease} containing the ID
+     * and like ["rhel", "fedora", ID]. Currently only supported for CentOS, Fedora, and RHEL. Other
+     * variants will return {@code null}.
      */
     private static LinuxRelease parseLinuxRedhatReleaseFile(File file) {
         BufferedReader reader = null;
@@ -382,11 +386,17 @@ public class PlatformDetector
     }
 
     public static void main(String[] args) {
-    	PlatformDetector detector = new PlatformDetector() {
-    		protected void log(String msg) {System.out.println(msg);}
-    		protected void logProperty(String name, String value) {log(name + ": " + value);}
-    	};
-    	Properties props = new Properties();
-    	detector.detect(props, null);
+        PlatformDetector detector =
+                new PlatformDetector() {
+                    protected void log(String msg) {
+                        System.out.println(msg);
+                    }
+
+                    protected void logProperty(String name, String value) {
+                        log(name + ": " + value);
+                    }
+                };
+        Properties props = new Properties();
+        detector.detect(props, null);
     }
 }

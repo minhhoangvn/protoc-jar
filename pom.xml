@@ -5,7 +5,7 @@
     <groupId>io.github.minhhoangvn</groupId>
     <artifactId>protoc-jar</artifactId>
     <packaging>jar</packaging>
-    <version>3.11.4</version>
+    <version>3.21.4</version>
     <name>protoc-jar</name>
     <url>https://github.com/minhhoangvn/protoc-jar</url>
     <description>Protocol Buffers compiler - executable JAR and API</description>

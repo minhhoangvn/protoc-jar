@@ -15,13 +15,13 @@
  */
 package com.github.os72.protocjar;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class ProtocTest {
     @Test
@@ -48,6 +48,10 @@ public class ProtocTest {
             assertEquals(0, Protoc.runProtoc(args));
         }
         {
+            String[] args = {"--version", "-v3.21.4"};
+            assertEquals(0, Protoc.runProtoc(args));
+        }
+        {
             String[] args = {"--version", "-v3.7.0"}; // not embedded, should trigger download
             assertEquals(0, Protoc.runProtoc(args));
         }
@@ -55,7 +59,9 @@ public class ProtocTest {
         {
             boolean assertion = false;
             try {
-                String[] args = {"--version", "-v3.7.0-SNAPSHOT"}; // not embedded, should trigger download
+                String[] args = {
+                    "--version", "-v3.7.0-SNAPSHOT"
+                }; // not embedded, should trigger download
                 assertEquals(1, Protoc.runProtoc(args));
             } catch (FileNotFoundException e) {
                 assertion = true;
@@ -68,8 +74,12 @@ public class ProtocTest {
     public void testRunProtocDownloadArtifact() throws Exception { // download by artifact id
         log("testRunProtocDownloadArtifact");
         String cls = Protoc.getPlatformClassifier();
-        if (cls.startsWith("linux-x86") || cls.startsWith("osx-x86") || cls.startsWith("windows-x86")) {
-            String[] args = {"--version", "-v:com.google.protobuf:protoc:3.1.0"}; // should automatically pick up 3.1.0-build2
+        if (cls.startsWith("linux-x86")
+                || cls.startsWith("osx-x86")
+                || cls.startsWith("windows-x86")) {
+            String[] args = {
+                "--version", "-v:com.google.protobuf:protoc:3.1.0"
+            }; // should automatically pick up 3.1.0-build2
             assertEquals(0, Protoc.runProtoc(args));
         }
         {
@@ -88,13 +98,37 @@ public class ProtocTest {
         {
             String outDir = "target/test-protoc-stdtypes";
             new File(outDir).mkdirs();
-            String[] args = {"-v2.6.1", "--include_std_types", "-I.", "--java_out=" + outDir, sStdTypeExampleFile2};
+            String[] args = {
+                "-v2.6.1",
+                "--include_std_types",
+                "-I.",
+                "--java_out=" + outDir,
+                sStdTypeExampleFile2
+            };
             assertEquals(0, Protoc.runProtoc(args));
         }
         {
             String outDir = "target/test-protoc-stdtypes";
             new File(outDir).mkdirs();
-            String[] args = {"-v3.11.4", "--include_std_types", "-I.", "--java_out=" + outDir, sStdTypeExampleFile3};
+            String[] args = {
+                "-v3.11.4",
+                "--include_std_types",
+                "-I.",
+                "--java_out=" + outDir,
+                sStdTypeExampleFile3
+            };
+            assertEquals(0, Protoc.runProtoc(args));
+        }
+        {
+            String outDir = "target/test-protoc-stdtypes";
+            new File(outDir).mkdirs();
+            String[] args = {
+                "-v3.21.4",
+                "--include_std_types",
+                "-I.",
+                "--java_out=" + outDir,
+                sStdTypeExampleFile3
+            };
             assertEquals(0, Protoc.runProtoc(args));
         }
     }

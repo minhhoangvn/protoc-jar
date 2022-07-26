@@ -1,6 +1,6 @@
 /*
  * Copyright 2014 protoc-jar developers
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,36 +15,40 @@
  */
 package com.github.os72.protocjar;
 
-public class ProtocVersion
-{
-	public static final ProtocVersion PROTOC_VERSION = new ProtocVersion(null, null, "3.11.4");
+public class ProtocVersion {
+    public static final ProtocVersion PROTOC_VERSION = new ProtocVersion(null, null, "3.21.4");
 
-	public static ProtocVersion getVersion(String spec) {
-		if (!spec.startsWith("-v")) return null;
-		ProtocVersion version = null;
-		String[] as = spec.split(":");
-		if (as.length == 4 && as[0].equals("-v")) version = new ProtocVersion(as[1], as[2], as[3]);
-		else version = new ProtocVersion(null, null, spec.substring(2));
-		if (version.mVersion.length() == 3) { // "123" -> "1.2.3"
-			String dotVersion = version.mVersion.charAt(0) + "." + version.mVersion.charAt(1) + "." + version.mVersion.charAt(2);
-			version = new ProtocVersion(version.mGroup, version.mArtifact, dotVersion);
-		}
-		return version;
-	}
+    public static ProtocVersion getVersion(String spec) {
+        if (!spec.startsWith("-v")) return null;
+        ProtocVersion version = null;
+        String[] as = spec.split(":");
+        if (as.length == 4 && as[0].equals("-v")) version = new ProtocVersion(as[1], as[2], as[3]);
+        else version = new ProtocVersion(null, null, spec.substring(2));
+        if (version.mVersion.length() == 3) { // "123" -> "1.2.3"
+            String dotVersion =
+                    version.mVersion.charAt(0)
+                            + "."
+                            + version.mVersion.charAt(1)
+                            + "."
+                            + version.mVersion.charAt(2);
+            version = new ProtocVersion(version.mGroup, version.mArtifact, dotVersion);
+        }
+        return version;
+    }
 
-	public ProtocVersion(String group, String artifact, String version) {
-		mGroup = group;
-		mArtifact = artifact;
-		mVersion = version;
-	}
+    public ProtocVersion(String group, String artifact, String version) {
+        mGroup = group;
+        mArtifact = artifact;
+        mVersion = version;
+    }
 
-	@Override
-	public String toString() {
-		if (mArtifact == null) return mVersion;
-		return mGroup+":"+mArtifact+":"+mVersion;
-	}
+    @Override
+    public String toString() {
+        if (mArtifact == null) return mVersion;
+        return mGroup + ":" + mArtifact + ":" + mVersion;
+    }
 
-	public final String mGroup;
-	public final String mArtifact;
-	public final String mVersion;
+    public final String mGroup;
+    public final String mArtifact;
+    public final String mVersion;
 }

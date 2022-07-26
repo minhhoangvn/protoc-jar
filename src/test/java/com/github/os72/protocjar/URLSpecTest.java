@@ -1,6 +1,6 @@
 /*
  * Copyright 2014 protoc-jar developers
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -18,22 +18,19 @@ package com.github.os72.protocjar;
 import java.io.InputStream;
 import java.net.URLConnection;
 
-import org.junit.Test;
+public class URLSpecTest {
+    // enable this if a test proxy is available (eg, squid)
+    // @Test
+    public void testURLSpec() throws Exception {
+        log("testURLSpec");
+        URLSpec srcUrl = new URLSpec("https://repo.maven.apache.org/maven2/", "localhost", 3128);
+        URLConnection con = srcUrl.openConnection();
+        InputStream is = con.getInputStream();
+        Protoc.streamCopy(is, System.out);
+        log(srcUrl);
+    }
 
-public class URLSpecTest
-{
-	// enable this if a test proxy is available (eg, squid)
-	//@Test
-	public void testURLSpec() throws Exception {
-		log("testURLSpec");
-		URLSpec srcUrl = new URLSpec("https://repo.maven.apache.org/maven2/", "localhost", 3128);
-		URLConnection con = srcUrl.openConnection();
-		InputStream is = con.getInputStream();
-		Protoc.streamCopy(is, System.out);
-		log(srcUrl);
-	}
-
-	static void log(Object msg) {
-		System.out.println("protoc-jar-test: " + msg);
-	}
+    static void log(Object msg) {
+        System.out.println("protoc-jar-test: " + msg);
+    }
 }
